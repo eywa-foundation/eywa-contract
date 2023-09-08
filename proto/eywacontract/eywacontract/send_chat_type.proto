@@ -1,0 +1,14 @@
+syntax = "proto3";
+package eywacontract.eywacontract;
+
+option go_package = "eywa-contract/x/eywacontract/types";
+
+message SendChatType {
+  string index = 1; 
+  string chat = 2; 
+  string sender = 3; 
+  string receiver = 4; 
+  string time = 5; 
+  
+}
+

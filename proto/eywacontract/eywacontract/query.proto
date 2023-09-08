@@ -7,6 +7,7 @@ import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "eywacontract/eywacontract/params.proto";
 import "eywacontract/eywacontract/register_type.proto";
+import "eywacontract/eywacontract/send_chat_type.proto";
 
 option go_package = "eywa-contract/x/eywacontract/types";
 
@@ -26,6 +27,16 @@ service Query {
   }
   rpc RegisterTypeAll (QueryAllRegisterTypeRequest) returns (QueryAllRegisterTypeResponse) {
     option (google.api.http).get = "/eywa-contract/eywacontract/register_type";
+  
+  }
+  
+  // Queries a list of SendChatType items.
+  rpc SendChatType    (QueryGetSendChatTypeRequest) returns (QueryGetSendChatTypeResponse) {
+    option (google.api.http).get = "/eywa-contract/eywacontract/send_chat_type/{index}";
+  
+  }
+  rpc SendChatTypeAll (QueryAllSendChatTypeRequest) returns (QueryAllSendChatTypeResponse) {
+    option (google.api.http).get = "/eywa-contract/eywacontract/send_chat_type";
   
   }
 }
@@ -53,6 +64,23 @@ message QueryAllRegisterTypeRequest {
 
 message QueryAllRegisterTypeResponse {
   repeated RegisterType                           registerType = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination   = 2;
+}
+
+message QueryGetSendChatTypeRequest {
+  string index = 1;
+}
+
+message QueryGetSendChatTypeResponse {
+  SendChatType sendChatType = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllSendChatTypeRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllSendChatTypeResponse {
+  repeated SendChatType                           sendChatType = 1 [(gogoproto.nullable) = false];
            cosmos.base.query.v1beta1.PageResponse pagination   = 2;
 }
 

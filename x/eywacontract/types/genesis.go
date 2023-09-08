@@ -11,6 +11,7 @@ const DefaultIndex uint64 = 1
 func DefaultGenesis() *GenesisState {
 	return &GenesisState{
 		RegisterTypeList: []RegisterType{},
+		SendChatTypeList: []SendChatType{},
 		// this line is used by starport scaffolding # genesis/types/default
 		Params: DefaultParams(),
 	}
@@ -28,6 +29,16 @@ func (gs GenesisState) Validate() error {
 			return fmt.Errorf("duplicated index for registerType")
 		}
 		registerTypeIndexMap[index] = struct{}{}
+	}
+	// Check for duplicated index in sendChatType
+	sendChatTypeIndexMap := make(map[string]struct{})
+
+	for _, elem := range gs.SendChatTypeList {
+		index := string(SendChatTypeKey(elem.Index))
+		if _, ok := sendChatTypeIndexMap[index]; ok {
+			return fmt.Errorf("duplicated index for sendChatType")
+		}
+		sendChatTypeIndexMap[index] = struct{}{}
 	}
 	// this line is used by starport scaffolding # genesis/types/validate
 
