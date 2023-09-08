@@ -6,8 +6,9 @@ option go_package = "eywa-contract/x/eywacontract/types";
 
 // Msg defines the Msg service.
 service Msg {
-  rpc Register (MsgRegister) returns (MsgRegisterResponse);
-  rpc SendChat (MsgSendChat) returns (MsgSendChatResponse);
+  rpc Register  (MsgRegister ) returns (MsgRegisterResponse );
+  rpc SendChat  (MsgSendChat ) returns (MsgSendChatResponse );
+  rpc Handshake (MsgHandshake) returns (MsgHandshakeResponse);
 }
 message MsgRegister {
   string creator = 1;
@@ -24,4 +25,14 @@ message MsgSendChat {
 }
 
 message MsgSendChatResponse {}
+
+message MsgHandshake {
+  string creator       = 1;
+  string receiver      = 2;
+  string serverAddress = 3;
+  string roomId        = 4;
+  string time          = 5;
+}
+
+message MsgHandshakeResponse {}
 
