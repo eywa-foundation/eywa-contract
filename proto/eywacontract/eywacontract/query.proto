@@ -1,26 +1,58 @@
 syntax = "proto3";
+
 package eywacontract.eywacontract;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "eywacontract/eywacontract/params.proto";
+import "eywacontract/eywacontract/register_type.proto";
 
 option go_package = "eywa-contract/x/eywacontract/types";
 
 // Query defines the gRPC querier service.
 service Query {
+  
   // Parameters queries the parameters of the module.
-  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/eywa-contract/eywacontract/params";
+  
+  }
+  
+  // Queries a list of RegisterType items.
+  rpc RegisterType    (QueryGetRegisterTypeRequest) returns (QueryGetRegisterTypeResponse) {
+    option (google.api.http).get = "/eywa-contract/eywacontract/register_type/{index}";
+  
+  }
+  rpc RegisterTypeAll (QueryAllRegisterTypeRequest) returns (QueryAllRegisterTypeResponse) {
+    option (google.api.http).get = "/eywa-contract/eywacontract/register_type";
+  
   }
 }
-
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
+  
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
 }
+
+message QueryGetRegisterTypeRequest {
+  string index = 1;
+}
+
+message QueryGetRegisterTypeResponse {
+  RegisterType registerType = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllRegisterTypeRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllRegisterTypeResponse {
+  repeated RegisterType                           registerType = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination   = 2;
+}
+

@@ -1,0 +1,12 @@
+syntax = "proto3";
+package eywacontract.eywacontract;
+
+option go_package = "eywa-contract/x/eywacontract/types";
+
+message RegisterType {
+  string index = 1; 
+  string submitter = 2; 
+  string pubkey = 3; 
+  
+}
+
