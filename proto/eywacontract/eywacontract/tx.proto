@@ -1,7 +1,17 @@
 syntax = "proto3";
+
 package eywacontract.eywacontract;
 
 option go_package = "eywa-contract/x/eywacontract/types";
 
 // Msg defines the Msg service.
-service Msg {}
+service Msg {
+  rpc Register (MsgRegister) returns (MsgRegisterResponse);
+}
+message MsgRegister {
+  string creator = 1;
+  string pubkey  = 2;
+}
+
+message MsgRegisterResponse {}
+
