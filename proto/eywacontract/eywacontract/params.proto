@@ -1,0 +1,12 @@
+syntax = "proto3";
+package eywacontract.eywacontract;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "eywa-contract/x/eywacontract/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (gogoproto.goproto_stringer) = false;
+  
+}

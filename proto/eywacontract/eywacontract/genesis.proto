@@ -1,0 +1,12 @@
+syntax = "proto3";
+package eywacontract.eywacontract;
+
+import "gogoproto/gogo.proto";
+import "eywacontract/eywacontract/params.proto";
+
+option go_package = "eywa-contract/x/eywacontract/types";
+
+// GenesisState defines the eywacontract module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+}
