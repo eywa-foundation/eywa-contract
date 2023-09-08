@@ -36,7 +36,6 @@ func (k msgServer) Register(goCtx context.Context, msg *types.MsgRegister) (*typ
 	k.SetRegisterType(ctx, register_type)
 
 	// TODO: Handling the message
-	_ = ctx
 
 	return &types.MsgRegisterResponse{}, nil
 }

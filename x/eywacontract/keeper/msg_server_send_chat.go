@@ -29,7 +29,5 @@ func (k msgServer) SendChat(goCtx context.Context, msg *types.MsgSendChat) (*typ
 
 	k.SetSendChatType(ctx, chat)
 
-	_ = ctx
-
 	return &types.MsgSendChatResponse{}, nil
 }
