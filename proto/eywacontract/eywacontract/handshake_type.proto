@@ -1,0 +1,15 @@
+syntax = "proto3";
+package eywacontract.eywacontract;
+
+option go_package = "eywa-contract/x/eywacontract/types";
+
+message HandshakeType {
+  string index = 1; 
+  string receiver = 2; 
+  string sender = 3; 
+  string serverAddress = 4; 
+  string roomId = 5; 
+  string time = 6; 
+  
+}
+

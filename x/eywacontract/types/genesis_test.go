@@ -38,6 +38,14 @@ func TestGenesisState_Validate(t *testing.T) {
 						Index: "1",
 					},
 				},
+				HandshakeTypeList: []types.HandshakeType{
+					{
+						Index: "0",
+					},
+					{
+						Index: "1",
+					},
+				},
 				// this line is used by starport scaffolding # types/genesis/validField
 			},
 			valid: true,
@@ -60,6 +68,20 @@ func TestGenesisState_Validate(t *testing.T) {
 			desc: "duplicated sendChatType",
 			genState: &types.GenesisState{
 				SendChatTypeList: []types.SendChatType{
+					{
+						Index: "0",
+					},
+					{
+						Index: "0",
+					},
+				},
+			},
+			valid: false,
+		},
+		{
+			desc: "duplicated handshakeType",
+			genState: &types.GenesisState{
+				HandshakeTypeList: []types.HandshakeType{
 					{
 						Index: "0",
 					},

@@ -6,13 +6,15 @@ import "gogoproto/gogo.proto";
 import "eywacontract/eywacontract/params.proto";
 import "eywacontract/eywacontract/register_type.proto";
 import "eywacontract/eywacontract/send_chat_type.proto";
+import "eywacontract/eywacontract/handshake_type.proto";
 
 option go_package = "eywa-contract/x/eywacontract/types";
 
 // GenesisState defines the eywacontract module's genesis state.
 message GenesisState {
-           Params       params           = 1 [(gogoproto.nullable) = false];
-  repeated RegisterType registerTypeList = 2 [(gogoproto.nullable) = false];
-  repeated SendChatType sendChatTypeList = 3 [(gogoproto.nullable) = false];
+           Params        params            = 1 [(gogoproto.nullable) = false];
+  repeated RegisterType  registerTypeList  = 2 [(gogoproto.nullable) = false];
+  repeated SendChatType  sendChatTypeList  = 3 [(gogoproto.nullable) = false];
+  repeated HandshakeType handshakeTypeList = 4 [(gogoproto.nullable) = false];
 }
 

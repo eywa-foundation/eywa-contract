@@ -8,6 +8,7 @@ import "cosmos/base/query/v1beta1/pagination.proto";
 import "eywacontract/eywacontract/params.proto";
 import "eywacontract/eywacontract/register_type.proto";
 import "eywacontract/eywacontract/send_chat_type.proto";
+import "eywacontract/eywacontract/handshake_type.proto";
 
 option go_package = "eywa-contract/x/eywacontract/types";
 
@@ -37,6 +38,16 @@ service Query {
   }
   rpc SendChatTypeAll (QueryAllSendChatTypeRequest) returns (QueryAllSendChatTypeResponse) {
     option (google.api.http).get = "/eywa-contract/eywacontract/send_chat_type";
+  
+  }
+  
+  // Queries a list of HandshakeType items.
+  rpc HandshakeType    (QueryGetHandshakeTypeRequest) returns (QueryGetHandshakeTypeResponse) {
+    option (google.api.http).get = "/eywa-contract/eywacontract/handshake_type/{index}";
+  
+  }
+  rpc HandshakeTypeAll (QueryAllHandshakeTypeRequest) returns (QueryAllHandshakeTypeResponse) {
+    option (google.api.http).get = "/eywa-contract/eywacontract/handshake_type";
   
   }
 }
@@ -82,5 +93,22 @@ message QueryAllSendChatTypeRequest {
 message QueryAllSendChatTypeResponse {
   repeated SendChatType                           sendChatType = 1 [(gogoproto.nullable) = false];
            cosmos.base.query.v1beta1.PageResponse pagination   = 2;
+}
+
+message QueryGetHandshakeTypeRequest {
+  string index = 1;
+}
+
+message QueryGetHandshakeTypeResponse {
+  HandshakeType handshakeType = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllHandshakeTypeRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllHandshakeTypeResponse {
+  repeated HandshakeType                          handshakeType = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination    = 2;
 }
 
