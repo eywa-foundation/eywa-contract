@@ -9,12 +9,16 @@ import (
 
 func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgRegister{}, "eywacontract/Register", nil)
+	cdc.RegisterConcrete(&MsgSendChat{}, "eywacontract/SendChat", nil)
 	// this line is used by starport scaffolding # 2
 }
 
 func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgRegister{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgSendChat{},
 	)
 	// this line is used by starport scaffolding # 3
 

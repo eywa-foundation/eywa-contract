@@ -70738,6 +70738,8 @@ definitions:
     description: Period defines a length of time and amount of coins that will vest.
   eywacontract.eywacontract.MsgRegisterResponse:
     type: object
+  eywacontract.eywacontract.MsgSendChatResponse:
+    type: object
   eywacontract.eywacontract.Params:
     type: object
     description: Params defines the parameters for the module.
