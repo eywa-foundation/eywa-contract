@@ -17,7 +17,7 @@ echo $NAMESPACE_ID
 # to allow users to interact with Celestia's core network by querying
 # the node's state and broadcasting transactions on the Celestia
 # network. This is for Arabica, if using another network, change the RPC.
-DA_BLOCK_HEIGHT=$(curl https://rpc-arabica-9.consensus.celestia-arabica.com/block |jq -r '.result.block.header.height')
+DA_BLOCK_HEIGHT=$(curl rpc.celestia-mocha.com/block |jq -r '.result.block.header.height')
 echo $DA_BLOCK_HEIGHT
 
 # build the eywa-contract chain with Rollkit
@@ -44,7 +44,7 @@ eywa-contractd collect-gentxs
 # export the Celestia light node's auth token to allow you to submit
 # PayForBlobs to Celestia's data availability network
 # this is for Arabica, if using another network, change the network name
-export AUTH_TOKEN=$(celestia light auth admin --p2p.network arabica)
+export AUTH_TOKEN=$(celestia light auth admin --p2p.network mocha)
 
 # start the chain
-eywa-contractd start --rollkit.aggregator true --rollkit.da_layer celestia --rollkit.da_config='{"base_url":"http://localhost:5555","timeout":60000000000,"fee":600000,"gas_limit":6000000,"auth_token":"'$AUTH_TOKEN'"}' --rollkit.namespace_id $NAMESPACE_ID --rollkit.da_start_height $DA_BLOCK_HEIGHT
+eywa-contractd start --rollkit.aggregator true --rollkit.da_layer celestia --rollkit.da_config='{"base_url":"http://localhost:26658","timeout":60000000000,"fee":600000,"gas_limit":6000000,"auth_token":"'$AUTH_TOKEN'"}' --rollkit.namespace_id $NAMESPACE_ID --rollkit.da_start_height $DA_BLOCK_HEIGHT
