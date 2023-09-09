@@ -18,6 +18,9 @@ NAMESPACE_ID=$(openssl rand -hex 10)
 # network. The default port is 26657.
 DA_BLOCK_HEIGHT=$(curl http://0.0.0.0:26657/block | jq -r '.result.block.header.height')
 
+export AUTH_TOKEN=$(docker exec $(docker ps -q)  celestia bridge --node.store /bridge  auth admin)
+
+
 # rollkit logo
 cat <<'EOF'
 
