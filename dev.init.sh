@@ -20,7 +20,7 @@ echo $NAMESPACE_ID
 DA_BLOCK_HEIGHT=$(curl https://rpc-arabica-9.consensus.celestia-arabica.com/block |jq -r '.result.block.header.height')
 echo $DA_BLOCK_HEIGHT
 
-# build the recipes chain with Rollkit
+# build the eywa-contract chain with Rollkit
 ignite chain build
 
 # reset any existing genesis/chain data
@@ -29,10 +29,10 @@ eywa-contractd tendermint unsafe-reset-all
 # initialize the validator with the chain ID you set
 eywa-contractd init $VALIDATOR_NAME --chain-id $CHAIN_ID
 
-# add key to keyring-backend test
+# add keys for key 1 and key 2 to keyring-backend test
 eywa-contractd keys add $KEY_NAME --keyring-backend test
 
-# add a genesis account
+# add these as genesis accounts
 eywa-contractd add-genesis-account $KEY_NAME $TOKEN_AMOUNT --keyring-backend test
 
 # set the staking amounts in the genesis transaction
@@ -44,11 +44,7 @@ eywa-contractd collect-gentxs
 # export the Celestia light node's auth token to allow you to submit
 # PayForBlobs to Celestia's data availability network
 # this is for Arabica, if using another network, change the network name
-export AUTH_TOKEN=$(celestia light auth write --p2p.network arabica)
-echo $AUTH_TOKEN
+export AUTH_TOKEN=$(celestia light auth admin --p2p.network arabica)
 
 # start the chain
-#eywa-contractd start --rollkit.aggregator true --rollkit.da_layer celestia --rollkit.da_config='{"base_url":"http://localhost:26658","timeout":60000000000,"fee":600000,"gas_limit":6000000,"auth_token":"'$AUTH_TOKEN'"}' --rollkit.namespace_id $NAMESPACE_ID --rollkit.da_start_height $DA_BLOCK_HEIGHT
-
-
-eywa-contractd start --rollkit.aggregator true --rollkit.da_layer celestia --rollkit.da_config='{"base_url":"http://127.0.0.1:26658","timeout":60000000000,"fee":600000,"gas_limit":6000000,"auth_token":"'$AUTH_TOKEN'"}' --rollkit.namespace_id $NAMESPACE_ID --rollkit.da_start_height $DA_BLOCK_HEIGHT --rpc.laddr tcp://127.0.0.1:36657 --p2p.laddr "0.0.0.0:36656"
+eywa-contractd start --rollkit.aggregator true --rollkit.da_layer celestia --rollkit.da_config='{"base_url":"http://localhost:5555","timeout":60000000000,"fee":600000,"gas_limit":6000000,"auth_token":"'$AUTH_TOKEN'"}' --rollkit.namespace_id $NAMESPACE_ID --rollkit.da_start_height $DA_BLOCK_HEIGHT
